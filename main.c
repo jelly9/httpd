@@ -26,10 +26,10 @@ int main(int argc, char *argv[])
             continue;
         }
 
-        printf("get client [%s:%d]\n", inet_ntoa(client.sin_addr), ntohs(client.sin_port));
+        printf("get client:[%s : %d]\n", inet_ntoa(client.sin_addr), ntohs(client.sin_port));
 
         pthread_t id;
-        int ret = pthread_create(&id, NULL, handler_request, (void*)new_sock);
+        int ret = pthread_create(&id, NULL, handler_request, (void*)&new_sock);
         if(ret != 0){
             print_log(strerror(errno), WARNING);
             close(new_sock);
@@ -39,4 +39,5 @@ int main(int argc, char *argv[])
     }
     close(listen_sock);
     return 0;
+
 }

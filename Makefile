@@ -4,7 +4,7 @@ CONF=$(ROOT_PATH)/conf
 PLUGIN=$(ROOT_PATH)/plugin
 WWWROOT=$(ROOT_PATH)/wwwroot
 cc=gcc
-FLAGS=-D_STDOUT_ -D_DEBUG_
+FLAGS=-D_STDOUT_i# -D_DEBUG_
 LDFLAGS=-lpthread
 bin=httpd
 src=httpd.c main.c
@@ -17,8 +17,8 @@ $(bin):$(obj)
 %.o:%.c
 	$(cc) -c $< $(FLAGS)
 
-.PHONY:clear
-clear:
+.PHONY:cl
+cl:
 	rm *.o $(bin)
 
 debug:
