@@ -130,13 +130,33 @@ static int exec_cgi(int sock, char *method, char *path, char *query_string)
         }while(ret > 0 && strcmp(line, "\n"));       
 
         if(content_len == -1){
-            echo_mgs(sock);
+            echo_msg(sock);
             return 10;
         }
     }
     //请求的资源已被受理
     //头部信息已经全被丢弃，剩下的全是正文信息
     //已经获得资源长度信息
+    //
+    
+    int input[2];
+    int output[2];
+    if(pipe(input) < 0){
+        echo_msg(sock);
+        return 11;
+    }
+
+    pid_t id = fork();
+    if(id < 0){
+        echo_msg(sock);
+        return 11;
+    }else if(id == 0){
+        execl(path, path, NULL);
+        exit(1);
+    }else{
+        int ret = waitpid(id, NULL, 0);
+        (void)ret;
+    }
 
     return 0;
 }
@@ -243,7 +263,7 @@ void *handler_request(void *arg)
         if(S_ISDIR(st.st_mode)){
             strcat(path, "/index.html");
         printf("error2\n");
-        }else if((st.st_mode & S_IXUSR) || \//目录文件可执行
+        }else if((st.st_mode & S_IXUSR) || \
                  (st.st_mode & S_IXGRP) || \
                  (st.st_mode & S_IXOTH)){//说明是可执行文件
             printf("%d\n", cgi);

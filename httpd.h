@@ -15,6 +15,7 @@
 #include <sys/socket.h>
 #include <sys/stat.h>
 #include <sys/sendfile.h>
+#include <sys/wait.h>
 
 #define SUCCESS 0
 #define NOTICE  1
