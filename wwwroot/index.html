@@ -3,7 +3,16 @@
     <head>hello world</head>
     <body>
         <h1> this is my http server</h1>
-        <img src="/imag/1.jpg" alt="Big Boat">
+
+        <form action="/cgi-bin/mathcgi" method="GET">
+            First data:<br>
+            <input type="text" name="firstdata" value="1">
+            <br>
+            Last data:<br>
+            <input type="text" name="lastdata" value="2">
+            <br><br>
+            <input type="submit" value"Submit">
+        </form>
     </body>
 
 </html>
