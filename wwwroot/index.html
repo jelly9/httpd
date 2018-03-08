@@ -4,15 +4,29 @@
     <body>
         <h1> this is my http server</h1>
 
-        <form action="/cgi-bin/mathcgi" method="GET">
-            First data:<br>
-            <input type="text" name="firstdata" value="1">
+
+        <form action="/cgi-bin/insert_cgi" method="GET">
+            name:<br>
+            <input type="text" name="name" value="zs">
             <br>
-            Last data:<br>
-            <input type="text" name="lastdata" value="2">
+            sex:<br>
+            <input type="text" name="sex" value="man">
+            <br>
+            age:<br>
+            <input type="text" name="age" value="18">
+            <br>
+            hobby:<br>
+            <input type="text" name="hobby" value="coding">
+            <br>
+            school:<br>
+            <input type="text" name="school" value="SUST">
             <br><br>
             <input type="submit" value"Submit">
+
         </form>
+
+        <a href="cgi-bin/select_cgi">select</a>
+
     </body>
 
 </html>

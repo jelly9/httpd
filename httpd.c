@@ -118,7 +118,6 @@ static void drop_handler(int sock)
 static int exec_cgi(int sock, char *method, char *path, char *query_string)
 {
 
-    printf("enter CGI\n");
     int content_len = -1;
     char method_env[SIZE/10];
     char query_string_env[SIZE];
@@ -168,7 +167,6 @@ static int exec_cgi(int sock, char *method, char *path, char *query_string)
         echo_msg(sock);
         return 12;
     }else if(id == 0){//child
-        printf("enter child process\n");
         close(input[1]);
         close(output[0]);
         
@@ -187,9 +185,8 @@ static int exec_cgi(int sock, char *method, char *path, char *query_string)
 
         dup2(input[0], 0);
         dup2(output[1], 1);
-        printf("ready to execl\n");
         execl(path, path, NULL);
-        printf("execl error\n");
+        echo_msg(sock);
         exit(1);
     }else{//father
         close(input[0]);

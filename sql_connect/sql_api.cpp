@@ -1,7 +1,6 @@
 
 #include "sql_api.h"
 
-
 sqlApi::sqlApi(const string &h, const int port, const string &u, const string &p, const string &db)
 {
     m_host = h;
@@ -56,21 +55,33 @@ int sqlApi::select()
     string sql = "SELECT * FROM http_test1";
     if(mysql_query(m_conn, sql.c_str()) == 0){
         m_res = mysql_store_result(m_conn);
-        cout << "m_res: " << m_res << endl;
-
 
         if(m_res){
             int rows = mysql_num_rows(m_res);
             int col =  mysql_num_fields(m_res);
             cout << "rows: " << rows << "col: " << col << endl;
 
-        //    free(m_res);
+            MYSQL_FIELD *fd;
+            while(fd = mysql_fetch_field(m_res)){
+                cout << fd->name << " ";
+            }
+            cout << endl;
+
+            int i = 0;
+            int j = 0; 
+            for(; i < rows; i++){
+                MYSQL_ROW row_res = mysql_fetch_row(m_res);
+                j = 0;
+                for(; j < col; j++){
+                    cout << row_res[j] << ',';
+                }
+                cout << endl;
+            }
+            cout << endl;
         }
     }
- 
     //mysql_store_result(mconn);
 }
-
 
 sqlApi::~sqlApi()
 {
