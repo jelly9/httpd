@@ -1,7 +1,7 @@
 
-mathcgi:mathcgi.c
+math_cgi:math_cgi.c
 	gcc -o $@ $^
 
 .PHONY:cl
 cl:
-	rm mathcgi
+	rm math_cgi

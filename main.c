@@ -1,6 +1,6 @@
 
 #include <pthread.h>
-#include "httpd.h"
+#include "myhttpd.h"
 
 static void usage(const char *proc)
 {

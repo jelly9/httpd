@@ -14,6 +14,7 @@ void insertToDb(const char *arg)
     int i = 0;
     while(*start){
         if(*start == '='){
+            ++start;
             myargv[i++] = start;
         }
         if(*start == '&'){
@@ -21,7 +22,6 @@ void insertToDb(const char *arg)
         }
         start++;
     }
-
 
     myargv[i] = '\0';
     sqlApi mydb("127.0.0.1", \
@@ -42,7 +42,7 @@ int main()
                 "m9", \
                 "httpd");
     mydb.connect();
-    mydb.select();
+    mydb.insert("LM", "wman", "18", "study", "SUST");
 #else
 
     char *method = NULL;

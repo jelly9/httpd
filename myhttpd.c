@@ -1,6 +1,6 @@
 
 //my httpd server:wq
-#include "httpd.h"
+#include "myhttpd.h"
 
 void print_log(const char *msg, int level)
 {
@@ -130,9 +130,13 @@ static int exec_cgi(int sock, char *method, char *path, char *query_string)
         int ret;
         do{
             ret = get_line(sock, line, sizeof(line));
-            if(ret >0 && \
-               strncasecmp(line, "Content-Lenght: ", 16)){
+            printf("ret: %d line: %s", ret, line);
+            if(ret > 0 && \
+               strncmp(line, "Content-Lenght:", 15) == 0){
+                printf("line: %s", line);
+
                 content_len = atoi(&line[16]);
+                break;
             }
         }while(ret > 0 && strcmp(line, "\n"));       
         printf("content_len:%d\n", content_len);

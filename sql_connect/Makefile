@@ -1,7 +1,7 @@
 ROOTPATH=$(shell pwd)
 MYSQL_INCLUDE=$(ROOTPATH)/lib/include
 MYSQL_LIB=$(ROOTPATH)/lib/lib
-FLAGS=-D_DEBUG_
+FLAGS=#-D_DEBUG_
 
 .PHONY:all
 all: insert_cgi select_cgi
@@ -14,6 +14,7 @@ select_cgi:select_cgi.o sql_api.o
 
 %.o:%.cpp
 	g++ -c $< $(FLAGS) -I$(MYSQL_INCLUDE)
+
 
 .PHONY:cl
 cl:
